@@ -1,0 +1,8 @@
+{
+  "env": {
+    "PORT": 8088,
+    "MONGO_USER": "zura",
+    "MONGO_PASSWORD": "9227b9Ec",
+    "MONGO_DB": "events-dev"
+  }
+}
