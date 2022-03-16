@@ -1,18 +1,25 @@
 const Koa = require("koa");
 const Router = require("@koa/router");
 const graphqlHTTP = require("koa-graphql");
-const bodyParser = require("body-parser");
+const bodyParser = require("koa-bodyparser");
+  const expressPlayground = require("graphql-playground-middleware-express").default;
 const mongoose = require("mongoose");
 const graphQlSchema = require("./graphql/schema/index");
 const graphQlResolvers = require("./graphql/resolvers/index");
-
+const isAuth = require("./middleware/is-auth");
 const app = new Koa();
-// app.use(bodyParser.json());
+// app.use(bodyParser());
+
+  const headers = JSON.stringify({
+    "apollographql-client-name": "playground",
+    "apollographql-client-version": "yada-yada",
+  });
 
 const router = new Router();
-
+// app.use(isAuth);
 router.all(
   "/graphql",
+  isAuth,
   graphqlHTTP({
     schema: graphQlSchema,
     graphiql: true,
